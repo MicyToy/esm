@@ -33,7 +33,17 @@ jobs:
         # macos not support
         CGO_ENABLED: 0
         PROJ_ROOT: ${{ github.workspace }}
-        
+
+    - name: Upload Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: v${{env.VERSION}}
+        name: "Esm release v${{env.VERSION}}"
+        body: "Changes"
+        token: ${{ secrets.GITHUB_TOKEN }}
+        files: |
+          build/*
+
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.3.3
       with:
